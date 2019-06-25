@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        E-shop - Admin
+    </title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+</head>
+
+<body ng-app="adminApp" ng-controller="adminCtrl">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">E-Shop</span>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="alert alert-danger" ng-show="errMsgShow">
+            {{errMsg}}
+            <button type="button" class="close" ng-click="closeAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+        <form class="form mt-3" ng-submit="login()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ng-model="username" class="form-control" id="username" placeholder="Eg : admin123@caratlane.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input ng-model="password" class="form-control" id="password" placeholder="********" type="password">
+            </div>
+            <button class="btn btn-outline-success" ng-disabled="loginBtnDisable">{{loginBtnHtml}}</button>
+        </form>
+    </div>
+</body>
+<script src="/admin/js/login.js"></script>
+
+</html>
