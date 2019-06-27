@@ -1,10 +1,14 @@
 class ProductsController < ApplicationController
   def create
-    @product = Product.new(params.require(:product).permit(:name, :price))
-    if @product.save
-      render :json => { "insertId" => @product.id }
+    @product = Product.new(params.require(:product).permit(:name, :price)) rescue nil
+    if @product
+      if @product.save
+        render :json => { "insertId" => @product.id }
+      else
+        render :status => 500,:json => { "errors" => @product.errors.messages }
+      end
     else
-      render :status => 500
+      render :status => 500,:json => { message: "server error" }
     end
   end
 
@@ -15,8 +19,12 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params.require(:product)[:id]) rescue nil
-    if @product && @product.update(params.require(:product).permit(:name, :price))
-      render :status => 200,:json => { 'message' => 'success' } 
+    if @product
+      if @product.update(params.require(:product).permit(:name, :price))
+        render :status => 200,:json => { 'message' => 'success' }
+      else
+        render :status => 500,:json => { "errors" => @product.errors.messages }
+      end
     else
       render :status => 404,:json => { 'message' => 'not found' }
     end

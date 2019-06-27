@@ -11,8 +11,8 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="https://kit.fontawesome.com/9267d35c5d.js"></script>
-    <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 </head>
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 
 <body ng-app="adminApp" ng-controller="adminCtrl">
     <nav class="navbar navbar-dark bg-dark">
@@ -40,11 +40,21 @@
                             </div>
                             <input type="text" class="form-control" id="name" placeholder="Eg : Gold" ng-model="currProduct.name">
                         </div>
+                        <div class="alert alert-danger" ng-show="errors.name.length">
+                            <ul>
+                                <li ng-repeat="error in errors.name">Name {{error}}</li>
+                            </ul>
+                        </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="price">Price</label>
                             </div>
                             <input type="text" class="form-control" id="price" placeholder="Eg : 8000" ng-model="currProduct.price">
+                        </div>
+                        <div class="alert alert-danger" ng-show="errors.price.length">
+                            <ul>
+                                <li ng-repeat="error in errors.price">Price {{error}}</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="modal-footer">

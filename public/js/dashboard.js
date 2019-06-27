@@ -60,8 +60,9 @@ app.controller('adminCtrl', function($scope, $http) {
             $('#productInfoModal').modal('toggle');
             alert('Successfully saved');
         }, function(res) {
-            console.log(res);
-            alert("Error on insert");
+            console.log(res.data);
+            $scope.errors = res.data.errors;
+            // alert("Error on insert");
         });
     }
     $scope.deleteProduct = function(ind) {
